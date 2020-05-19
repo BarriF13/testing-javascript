@@ -4,5 +4,10 @@ var Gallery = (function (){
   galleryPrototype = {
 
   };
+  Gallery.create = function (id){
+    var gal = Object.create(galleryPrototype);
+
+    return gal;
+  };
   return Gallery;
 }());
