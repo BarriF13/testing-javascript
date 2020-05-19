@@ -1,14 +1,10 @@
 var TEST = {
     areEqual: function(a,b, message){
-      var result = (a === b );
-      console.log(result ? "PASS: " : "FAIL: " )+ message;
-      return result;
+      return this._output(a === b , message);
     },
     areNotEqual: function(a,b, message){
-      var result = (a !== b );
-      console.log(result ? "PASS: " : "FAIL: " )+ message;
-      return result;
-    }
+      return this._output(a !== b, message);
+    },
     _output: function (result, message){
       console[result ? "log" : "warn"] (result ? "PASS: " : "FAIL: ") + message;
     }
