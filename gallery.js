@@ -7,7 +7,8 @@ var Gallery = (function (){
   Gallery.create = function (id){
     var gal = Object.create(galleryPrototype);
 
-    return gal;
+    // return gal;
+    return "some String";
   };
   return Gallery;
 }());
