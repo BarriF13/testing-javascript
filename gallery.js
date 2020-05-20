@@ -2,7 +2,28 @@ var Gallery = (function () {
   var Gallery = {},
 
     galleryPrototype = {
-
+        set: function (i) {
+          if( typeof i === "string"){
+            i = this.ids.indexOf(i);
+          }
+          if (i>-1 && i < this.ids.length){
+            this.displayImage.setAttribute("src", "images/" + this.ids[i] + ".jpg");
+            return (this.idx = i);
+          }
+          return -1;
+        },
+        next: function (){
+          if (this.idx === this.imgs.length -1){
+            return  this.set(0)
+          }
+          return this.set(i + 1);
+        },
+        prev: function (){
+          if (this.idx === 0){
+            return  this.set(this.ims.length -1);
+          }
+          return this.set(i - 1);
+        }
     };
   Gallery.create = function (id) {
     var gal = Object.create(galleryPrototype), ul, i=0 ,len;
