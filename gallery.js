@@ -3,10 +3,10 @@ var Gallery = (function () {
 
     galleryPrototype = {
         set: function (i) {
-          if( typeof i === "string"){
+          if (typeof i === "string") {
             i = this.ids.indexOf(i);
           }
-          if (i>-1 && i < this.ids.length){
+          if (i > -1 && i < this.ids.length){
             this.displayImage.setAttribute("src", "images/" + this.ids[i] + ".jpg");
             return (this.idx = i);
           }
@@ -14,17 +14,41 @@ var Gallery = (function () {
         },
         next: function (){
           if (this.idx === this.imgs.length -1){
-            return  this.set(0)
+            return  this.set(0);
           }
-          return this.set(i + 1);
+          return this.set(this.idx + 1);
         },
         prev: function (){
           if (this.idx === 0){
             return  this.set(this.ims.length -1);
           }
-          return this.set(i - 1);
+          return this.set(this.idx - 1);
+        },
+        start: function (time) {
+          var thiz = this;
+          time = time || 3000;
+          this.interval = setInterval(function () {
+            thiz.next();
+          }, time);
+          this.going = true;
+          return true;
+        },
+        stop: function () {
+          clearInterval(this.interval);
+          this.going = false;
+          return true;
+        },
+        current: function () {
+          return this.idx;
+        },
+        isGoing: function (){
+          return this.going;
+        },
+        isStopped: function (){
+          return !this.going;
         }
     };
+
   Gallery.create = function (id) {
     var gal = Object.create(galleryPrototype), ul, i=0 ,len;
     gal.el = document.getElementById(id);
@@ -40,7 +64,7 @@ var Gallery = (function () {
     for (; i < len; i++) {
       gal.ids[i] = gal.imgs[i].getAttribute("src").split("-thumb")[0].split("/")[1];
     }
-    ul.addEventListener("click", function (e) {
+    ul.addEventListener("click", function(e) {
       var i = [].indexOf.call(gal.imgs, e.target);
       if (i > -1) {
         gal.set(i);
