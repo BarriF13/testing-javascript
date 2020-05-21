@@ -20,7 +20,7 @@ var Gallery = (function () {
         },
         prev: function (){
           if (this.idx === 0){
-            return  this.set(this.ims.length -1);
+            return  this.set(this.imgs.length -1);
           }
           return this.set(this.idx - 1);
         },

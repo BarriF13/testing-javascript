@@ -20,4 +20,25 @@ TEST.areEqual(gal.next(), 0, "Gallery.next should advance images (wraparound)");
 
 TEST.areEqual(gal.prev(), 4, "Gallery.prev should advance images(wraparound)");
 
-TEST.areEqual(gal.prev(), 3, "Gallery.prev should advance images") ;
+TEST.areEqual(gal.prev(), 3, "Gallery.next should advance images") ;
+
+gal.set(0);
+
+TEST.areEqual(gal.start(), true, "Gallery.start beings looping");
+
+TEST.areEqual(gal.current(), 0, "Gallery index should be 0");
+
+setTimeout(function() {
+  TEST.areEqual(gal.current(), 1 , "Gallery index should be 1");
+
+  TEST.areEqual(gal.isGoing(), true , "Gallery should be looping");
+
+  TEST.areEqual(gal.stop(), true , "Gallery.stop ends looping");
+
+  setTimeout(function(){
+    TEST.areNotEqual(gal.current(), 2 ,"Gallery index should not be 2" );
+
+    TEST.areEqual(gal.isStopped(), true, "Gallery should be stopped ")
+  }),3050;
+
+}, 3050);
